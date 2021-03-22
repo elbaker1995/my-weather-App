@@ -1,0 +1,132 @@
+body {
+  background-image: linear-gradient(
+    to top,
+    #f3e7e9 0%,
+    #e3eeff 99%,
+    #e3eeff 100%
+  );
+  font-family: "Quicksand", "sans-serif";
+  margin: 15px;
+  padding: 0 auto;
+  text-align: center;
+}
+
+h1,
+h2 {
+  color: #868e99;
+  font-size: 80px;
+  font-weight: 400;
+}
+
+h3 {
+  color: #868e99;
+  font-size: 50px;
+  font-weight: 400;
+}
+
+form,
+.popularCities,
+.curentCity,
+#searchbar {
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
+footer,
+.popularCities {
+  color: #868e99;
+  font-size: 25px;
+}
+
+#sydney,
+#tokyo,
+#london,
+#current-location {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid #e3eeff;
+  border-radius: 10px;
+  color: #868e99;
+  text-transform: uppercase;
+}
+
+#sydney:hover,
+#tokyo:hover,
+#london:hover,
+#current-location:hover,
+.goButton {
+  background: #fcd1d1;
+  border: 1px solid #fff5ee;
+  border-radius: 10px;
+  box-shadow: rgba(37, 39, 89, 0.05) 0px 8px 8px 0;
+  color: #fff5ee;
+}
+
+#search-bar {
+  background: #fff5ee;
+  border: 1px solid #868e99;
+  border-radius: 10px;
+  box-shadow: rgba(37, 39, 89, 0.05) 0px 8px 8px 0;
+  color: #fcd1d1;
+  font-size: 20px;
+  width: 80%;
+}
+
+::placeholder {
+  color: #fcd1d1;
+}
+
+.goButton,
+#searchBar {
+  font-size: 20px;
+  padding: 5px 10px;
+}
+
+.goButton:hover {
+  background-color: #fff5ee;
+  border: 1px solid #fcd1d1;
+  color: #fcd1d1;
+}
+
+.card {
+  background-color: #fff5ee;
+  border: 2px solid #fff5ee;
+  box-shadow: rgba(37, 39, 89, 0.1) 0px 8px 8px 0;
+  color: #868e99;
+  font-size: 20px;
+}
+
+.card-header {
+  background: #fcd1d1;
+  border: #fcd1d1;
+  color: #fff5ee;
+  font-size: 40px;
+}
+
+.mainIcon {
+  font-size: 100px;
+}
+
+.icon {
+  font-size: 50px;
+}
+.sun {
+  color: #ffd384;
+}
+.snow {
+  color: #ffff;
+}
+
+.rain {
+  color: #e3eeff;
+}
+
+.cloud {
+  color: #b4bfce;
+}
+.linkedin:hover {
+  color: #0966c2;
+}
+
+.instagram:hover {
+  color: #ed4a62;
+}

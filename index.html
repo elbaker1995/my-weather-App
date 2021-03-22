@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather ⛅️</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/ee7684dcaf.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/style.css" class="css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-evenly popularCities">
+        <div class="col-2  sydney"><button id="sydney"><i class="fas fa-globe-asia"></i> SYD <span id="sydTemp">18°</span></button></div>
+        <div class="col-2  tokyo"> <button id="tokyo"><i class="fas fa-globe-asia"></i>  TYO <span id="tyoTemp">18°</span></button></div>
+        <div class="col-2 london"> <button id="london"><i class="fas fa-globe-europe"></i> LND <span id="lndTemp">18°</span></button></div>
+        <div class="col-4 current-location"> <button id="current-location">location </button></div>
+      </div>
+
+      <br />
+      
+      <form class="justify-content-evenly" id="search-form">
+        <input
+          type="search"
+          id="search-bar"
+          placeholder="Seach a new city"
+          autocomplete="off"
+        />
+        <input class="goButton" type="submit" value="Change" id="submit-button"/>
+      </form>
+      <br />
+      
+      
+      <div class="card justify-content-evenly curentCity" style="width: auto">
+        <div class="card-body"><h3>
+        time
+      </h3>
+          <h1 class="card-title" id="city">London</h1>
+          <h2 class="card-text" ><i class="fas fa-cloud-rain mainIcon rain"></i><span id="temperature">   19°</span></h2>
+        </div>
+      </div>
+      <br />
+
+      <div class="card justify-content-evenly" style="width: auto">
+        <div class="card-header">Prediction for the week</div>
+        <div class="card-body">
+          <div class="row justify-content-evenly">
+            <div class="col-1">
+              <div class="row justify-content-evenly">TUE</div>
+              <div class="row justify-content-evenly rain icon"><i class="fas fa-cloud-rain"></i></div>
+              <div class="row justify-content-evenly">6°C</div>
+            </div>
+
+            <div class="col-1">
+              <div class="row justify-content-evenly">WED</div>
+              <div class="row justify-content-evenly cloud icon"><i class="fas fa-cloud"></i></div>
+              <div class="row justify-content-evenly">11°C</div>
+            </div>
+
+            <div class="col-1">
+              <div class="row justify-content-evenly">THU</div>
+              <div class="row justify-content-evenly sun icon"><i class="fas fa-sun"></i></i></div>
+              <div class="row justify-content-evenly">12°C</div>
+            </div>
+
+            <div class="col-1">
+              <div class="row justify-content-evenly">FRI</div>
+              <div class="row justify-content-evenly snow icon"><i class="fas fa-snowflake"></i></i></div>
+              <div class="row justify-content-evenly">-1°C</div>
+            </div>
+
+            <div class="col-1">
+              <div class="row justify-content-evenly">SAT</div>
+              <div class="row justify-content-evenly rain icon"><i class="fas fa-cloud-rain"></i></div>
+              <div class="row justify-content-evenly">5°C</div>
+            </div>
+
+            <div class="col-1">
+              <div class="row justify-content-evenly">SUN</div>
+              <div class="row justify-content-evenly cloud icon"><i class="fas fa-cloud"></i></i></div>
+              <div class="row justify-content-evenly">10°C</div>
+            </div>
+          </div>
+        </div>
+      </div>
+<br />
+      <footer>
+        <p><a href="#" id="celsius">Celsius</a>  | <a href="#" id="fahrenheit">Fahrenheit</a></p>
+          Coded by Elenor Baker <i
+          class="fab fa-linkedin linkedin"></i>
+          <i class="fab fa-instagram instagram"></i></i></i>
+        </p>
+        <script src="src/script.js"></script>
+      </footer>
+    </div>
+  </body>
+</html>
