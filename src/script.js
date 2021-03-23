@@ -21,30 +21,53 @@ let months = [
 let month = months[now.getMonth()];
 h3.innerHTML = `${hours}:${minutes} ${date}${month}${year}  `;
 
-function showTemperature(response) {
-  let temperature = Math.round(response.data.main.temp);
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = ` ${temperature}°C`;
-}
-
-function defaultCity(city) {
+function search(city) {
   let apiKey = "d12bd95cd8fc2d137ab72261317f84d8";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=`;
-  axios
-    .get(`${apiUrl}${city}&units=metric&appid=${apiKey}`)
-    .then(showTemperature);
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+  axios.get(`${apiUrl}`).then(displayWeatherCondition);
 }
 
-function newCity(event) {
+function displayWeatherCondition(response) {
+  document.querySelector("#city").innerHTML = response.data.name;
+  document.querySelector("#temperature").innerHTML = Math.round(
+    response.data.main.temp
+  );
+  document.querySelector("#wind-speed").innerHTML = Math.round(
+    response.data.wind.speed
+  );
+  document.querySelector("#humidity").innerHTML = Math.round(
+    response.data.main.humidity
+  );
+  document.querySelector("#description").innerHTML =
+    response.data.weather[0].main;
+}
+
+function handleSubmit(event) {
   event.preventDefault();
   let city = document.querySelector("#search-bar").value;
-  defaultCity(city);
-  if (city) {
-    h1.innerHTML = `${city}`;
-  } else {
-    alert("Please type a city.");
-  }
+  search(city);
 }
+
+// function showTemperature(response) {
+//   let temperature = Math.round(response.data.main.temp);
+//   let temperatureElement = document.querySelector("#temperature");
+//   temperatureElement.innerHTML = ` ${temperature}°C`;
+// }
+
+// function defaultCity(city) {
+
+// }
+
+// function handleSubmit(event) {
+//   event.preventDefault();
+//   let city = document.querySelector("#search-bar").value;
+//   defaultCity(city);
+//   if (city) {
+//     h1.innerHTML = `${city}`;
+//   } else {
+//     alert("Please type a city.");
+//   }
+// }
 
 function sydButton(response) {
   let sydTemperature = Math.round(response.data.main.temp);
@@ -138,10 +161,10 @@ function changeToCurrentWeather(response) {
 navigator.geolocation.getCurrentPosition(showLocation);
 
 //
-let searchCity = document.querySelector("#search-form");
-searchCity.addEventListener("submit", newCity);
+let searchCityForm = document.querySelector("#search-form");
+searchCityForm.addEventListener("submit", handleSubmit);
 
-defaultCity("London");
+search("London");
 
 let h1 = document.querySelector("h1");
 let h2 = document.querySelector("#city");

@@ -11,11 +11,16 @@ body {
   text-align: center;
 }
 
-h1,
-h2 {
+h1 {
   color: #868e99;
   font-size: 80px;
   font-weight: 400;
+}
+
+h2,
+#description,
+.subIcon {
+  font-size: 45px;
 }
 
 h3 {
@@ -71,6 +76,10 @@ footer,
   width: 80%;
 }
 
+.mainIcon {
+  font-size: 80px;
+}
+
 ::placeholder {
   color: #fcd1d1;
 }
@@ -102,25 +111,24 @@ footer,
   font-size: 40px;
 }
 
-.mainIcon {
-  font-size: 100px;
-}
-
 .icon {
   font-size: 50px;
 }
-.sun {
+.sun,
+.temp {
   color: #ffd384;
 }
 .snow {
   color: #ffff;
 }
 
-.rain {
+.rain,
+.humidity {
   color: #e3eeff;
 }
 
-.cloud {
+.cloud,
+.wind {
   color: #b4bfce;
 }
 .linkedin:hover {
