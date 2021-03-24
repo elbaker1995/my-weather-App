@@ -48,26 +48,18 @@ function handleSubmit(event) {
   search(city);
 }
 
-// function showTemperature(response) {
-//   let temperature = Math.round(response.data.main.temp);
-//   let temperatureElement = document.querySelector("#temperature");
-//   temperatureElement.innerHTML = ` ${temperature}°C`;
-// }
+function searchLocation(position) {
+  let url = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=d12bd95cd8fc2d137ab72261317f84d8&units=metric`;
+  axios.get(url).then(displayWeatherCondition);
+}
 
-// function defaultCity(city) {
+function getCurrentLocation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchLocation);
+}
 
-// }
-
-// function handleSubmit(event) {
-//   event.preventDefault();
-//   let city = document.querySelector("#search-bar").value;
-//   defaultCity(city);
-//   if (city) {
-//     h1.innerHTML = `${city}`;
-//   } else {
-//     alert("Please type a city.");
-//   }
-// }
+let currentLocationButton = document.querySelector("#current-location");
+currentLocationButton.addEventListener("click", getCurrentLocation);
 
 function sydButton(response) {
   let sydTemperature = Math.round(response.data.main.temp);
@@ -118,56 +110,10 @@ function changeToLondon() {
   defaultCity("London");
 }
 
-// currentlocation
-function showTemp(response) {
-  let temp = Math.round(response.data.main.temp);
-  let currentLocation = response.data.name;
-  let here = document.querySelector("#current-location");
-  here.innerHTML = `${currentLocation} ${temp}°`;
-}
-
-function showLocation(position) {
-  let latitude = position.coords.latitude;
-  let longitude = position.coords.longitude;
-  let units = "metric";
-  let apiKey = "d12bd95cd8fc2d137ab72261317f84d8";
-  let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
-  axios.get(url).then(showTemp);
-}
-
-// current location button
-
-function changeToCurrentLocation(event) {
-  event.preventDefault();
-  navigator.geolocation.getCurrentPosition(CurrentLocationApi);
-}
-function CurrentLocationApi(position) {
-  let latitude = position.coords.latitude;
-  let longitude = position.coords.longitude;
-  let units = "metric";
-  let apiKey = "d12bd95cd8fc2d137ab72261317f84d8";
-  let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
-  axios.get(url).then(changeToCurrentWeather);
-}
-
-function changeToCurrentWeather(response) {
-  let temp = Math.round(response.data.main.temp);
-  let currentLocation = response.data.name;
-  let h1 = document.querySelector("h1");
-  h1.innerHTML = `${currentLocation}`;
-  defaultCity(`${temp}`);
-}
-
-navigator.geolocation.getCurrentPosition(showLocation);
-
-//
 let searchCityForm = document.querySelector("#search-form");
 searchCityForm.addEventListener("submit", handleSubmit);
 
 search("London");
-
-let h1 = document.querySelector("h1");
-let h2 = document.querySelector("#city");
 
 let sydneyButton = document.querySelector("#sydney");
 sydneyButton.addEventListener("click", changeToSydney);
@@ -177,9 +123,6 @@ tokyoButtons.addEventListener("click", changeToTokyo);
 
 let londonButtons = document.querySelector("#london");
 londonButtons.addEventListener("click", changeToLondon);
-
-let currentLocationButton = document.querySelector("#current-location");
-currentLocationButton.addEventListener("click", changeToCurrentLocation);
 
 // function changeToCelsius(event) {
 //   event.preventDefault();
