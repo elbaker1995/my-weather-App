@@ -61,68 +61,61 @@ function getCurrentLocation(event) {
 let currentLocationButton = document.querySelector("#current-location");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
-function sydButton(response) {
-  let sydTemperature = Math.round(response.data.main.temp);
-  let sydTemperatureElement = document.querySelector("#sydTemp");
-  sydTemperatureElement.innerHTML = `${sydTemperature}°`;
-}
-
-let apiSyd = `https://api.openweathermap.org/data/2.5/weather?q=Sydney&units=metric&appid=d12bd95cd8fc2d137ab72261317f84d8`;
-axios.get(apiSyd).then(sydButton);
-
-function changeToSydney() {
-  let h1 = document.querySelector("h1");
-  h1.innerHTML = `Sydney`;
-  defaultCity("Sydney");
-}
-
-// tokyo
-
-function tyoButton(response) {
-  let tyoTemperature = Math.round(response.data.main.temp);
-  let tyoTemperatureElement = document.querySelector("#tyoTemp");
-  tyoTemperatureElement.innerHTML = `${tyoTemperature}°`;
-}
-
-let apiTyo = `https://api.openweathermap.org/data/2.5/weather?q=Tokyo&units=metric&appid=d12bd95cd8fc2d137ab72261317f84d8`;
-axios.get(apiTyo).then(tyoButton);
-
-function changeToTokyo() {
-  let h1 = document.querySelector("h1");
-  h1.innerHTML = `Tokyo`;
-  defaultCity("Tokyo");
-}
-
-// london
-
-function lndButton(response) {
-  let lndTemperature = Math.round(response.data.main.temp);
-  let lndTemperatureElement = document.querySelector("#lndTemp");
-  lndTemperatureElement.innerHTML = `${lndTemperature}°`;
-}
-
-let apiLnd = `https://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=d12bd95cd8fc2d137ab72261317f84d8`;
-axios.get(apiLnd).then(lndButton);
-
-function changeToLondon() {
-  let h1 = document.querySelector("h1");
-  h1.innerHTML = `London`;
-  defaultCity("London");
-}
-
 let searchCityForm = document.querySelector("#search-form");
 searchCityForm.addEventListener("submit", handleSubmit);
 
-search("London");
+//sydney
+function searchSydney() {
+  axios.get(sydUrl).then(displayWeatherCondition);
+}
+
+function sydneyDisplay(response) {
+  document.querySelector("#syd-temp").innerHTML = Math.round(
+    response.data.main.temp
+  );
+}
 
 let sydneyButton = document.querySelector("#sydney");
-sydneyButton.addEventListener("click", changeToSydney);
+sydneyButton.addEventListener("click", searchSydney);
 
-let tokyoButtons = document.querySelector("#tokyo");
-tokyoButtons.addEventListener("click", changeToTokyo);
+let sydUrl = `https://api.openweathermap.org/data/2.5/weather?q=Sydney&units=metric&appid=d12bd95cd8fc2d137ab72261317f84d8`;
+axios.get(sydUrl).then(sydneyDisplay);
 
-let londonButtons = document.querySelector("#london");
-londonButtons.addEventListener("click", changeToLondon);
+// // tokyo
+function searchTokyo() {
+  axios.get(tyoUrl).then(displayWeatherCondition);
+}
+
+function tokyoDisplay(response) {
+  document.querySelector("#tyo-temp").innerHTML = Math.round(
+    response.data.main.temp
+  );
+}
+
+let tokyoButton = document.querySelector("#tokyo");
+tokyoButton.addEventListener("click", searchTokyo);
+
+let tyoUrl = `https://api.openweathermap.org/data/2.5/weather?q=Tokyo&units=metric&appid=d12bd95cd8fc2d137ab72261317f84d8`;
+axios.get(tyoUrl).then(tokyoDisplay);
+
+// // london
+function searchLondon() {
+  axios.get(lndUrl).then(displayWeatherCondition);
+}
+
+function londonDisplay(response) {
+  document.querySelector("#lnd-temp").innerHTML = Math.round(
+    response.data.main.temp
+  );
+}
+
+let londonButton = document.querySelector("#london");
+londonButton.addEventListener("click", searchLondon);
+
+let lndUrl = `https://api.openweathermap.org/data/2.5/weather?q=london&units=metric&appid=d12bd95cd8fc2d137ab72261317f84d8`;
+axios.get(lndUrl).then(londonDisplay);
+
+search("New York");
 
 // function changeToCelsius(event) {
 //   event.preventDefault();
