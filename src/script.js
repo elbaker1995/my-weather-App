@@ -35,9 +35,8 @@ function search(city) {
 
 function displayWeatherCondition(response) {
   document.querySelector("#city").innerHTML = response.data.name;
-  document.querySelector("#temperature").innerHTML = Math.round(
-    response.data.main.temp
-  );
+  celsius = response.data.main.temp;
+  document.querySelector("#temperature").innerHTML = Math.round(celsius);
   document.querySelector("#wind-speed").innerHTML = Math.round(
     response.data.wind.speed
   );
@@ -130,20 +129,27 @@ axios.get(lndUrl).then(londonDisplay);
 
 search("New York");
 
-// function changeToCelsius(event) {
-//   event.preventDefault();
-//   temperatureUnits.innerHTML = ` ${defaultCity}°C`;
-// }
-// function changeTofahrenheit(event) {
-//   event.preventDefault();
-//   temperatureUnits.innerHTML = `${fahrenheit}°F`;
-// }
+function changeTofahrenheit(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheit = (celsius * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheit);
+}
 
-// let unitsCelsius = document.querySelector("#celsius");
-// unitsCelsius.addEventListener("click", changeToCelsius);
+function changeToCelsius(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  temperatureElement.innerHTML = Math.round(celsius);
+}
 
-// let unitsFahrenheit = document.querySelector("#fahrenheit");
-// unitsFahrenheit.addEventListener("click", changeTofahrenheit);
+let celsius = null;
 
-// let temperatureUnits = document.querySelector("span, #temperature");
-// let fahrenheit = Math.round((defaultCity * 9) / 5 + 32);
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", changeTofahrenheit);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", changeToCelsius);

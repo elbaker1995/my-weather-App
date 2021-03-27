@@ -107,22 +107,6 @@ h1 {
   line-height: 50px;
 }
 
-a {
-  color: var(--detail-color);
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--primary-color);
-}
-
-.units {
-  color: var(--detail-color);
-  position: relative;
-  font-size: 16px;
-  top: -32px;
-}
-
 .mainIcon {
   font-size: 80px;
   text-align: center;
@@ -175,20 +159,14 @@ li {
   justify-content: space-evenly;
 }
 
-.icon,
 .subIcon {
   font-size: 30px;
 }
 
-.rain,
 .humidity,
 .wind,
 .temp {
   color: #e3eeff;
-}
-
-.cloud {
-  color: #b4bfce;
 }
 
 footer {
@@ -204,4 +182,28 @@ footer {
 }
 .gitHub:hover {
   color: #24292e;
+}
+
+.units {
+  color: var(--detail-color);
+  position: relative;
+  font-size: 20px;
+  top: -32px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--detail-color);
+}
+
+.active {
+  text-decoration: none;
+  font-weight: 900;
+  color: var(--detail-color);
+  cursor: default;
+}
+
+.active:hover {
+  text-decoration: none;
+  color: var(--detail-color);
 }
