@@ -73,6 +73,7 @@ footer,
 ::placeholder {
   color: var(--primary-color);
 }
+.weatherConditons,
 #search-form {
   display: flex;
   justify-content: space-between;
@@ -124,12 +125,6 @@ li {
   display: inline;
   list-style: none;
   line-height: 10px;
-}
-
-.weatherConditons {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
 }
 
 #temperature {
