@@ -24,17 +24,18 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
-    <div class="container">
-      <div class="row justify-content-evenly popularCities">
-        <div class="col-3  sydney"><button id="sydney"><i class="fas fa-globe-asia"></i> SYD <span id="syd-temp"></span>°</button></div>
-        <div class="col-3  tokyo"> <button id="tokyo"><i class="fas fa-globe-asia"></i>  TYO <span id="tyo-temp"></span>°</button></div>
-        <div class="col-3 london"> <button id="london"><i class="fas fa-globe-europe"></i> LND <span id="lnd-temp"></span>°</button></div>
-        <div class="col-3 current-location"> <button id="current-location">location </button></div>
+    <div class="weatherAppWrapper">
+      <div class="weatherApp">
+      <div class="popularCities">
+        <div class="sydney"><button id="sydney"><i class="fas fa-globe-asia"></i> SYD <span id="syd-temp"></span>°</button></div>
+        <div class="tokyo"><button id="tokyo"><i class="fas fa-globe-asia"></i>  TYO <span id="tyo-temp"></span>°</button></div>
+        <div class="london"><button id="london"><i class="fas fa-globe-europe"></i> LND <span id="lnd-temp"></span>°</button></div>
+        
       </div>
 
       <br />
       
-      <form class="justify-content-evenly" id="search-form">
+      <form id="search-form">
         <input
           type="search"
           id="search-bar"
@@ -42,78 +43,90 @@
           autocomplete="off"
         />
         <input class="goButton" type="submit" value="Change" id="submit-button"/>
+        <button id="current-location"><i class="fas fa-map-marker-alt"></i></button>
+
       </form>
       <br />
       
       
-      <div class="card justify-content-evenly curentCity" style="width: auto">
-        <div class="card-body"><h3>
-        time
-      </h3>
+      <div class="card curentCity">
+        <div class="card-body row">
+          <div class="col-8">
+          <div class="currentDate">
+            <span id="time"></span>
+            <span id="date"></span>
+          </div>
+          
           <h1 class="card-title" id="city">London</h1>
-          <i class="fas fa-cloud-rain mainIcon rain"></i><span id="description"> </span>
-          <div class = "row"><h2 class="card-text" >
-            <i class="fas fa-thermometer-full subIcon temp col-1"></i>
-            <span class="col-3" id="temperature"></span><span>°C</span>
-          <i class="fas fa-wind subIcon wind col-1"></i> 
-          <span class="col-3" id="wind-speed"></span><span>Km/h</span> 
-          <i class="fas fa-tint subIcon humidity col-1"></i>
-          <span class="col-3" id="humidity"></span><span>%</span></h2>
-        </div></div>
-      </div>
-      <br />
+        </div>
 
-      <div class="card justify-content-evenly" style="width: auto">
-        <div class="card-header">Prediction for the week</div>
-        <div class="card-body">
-          <div class="row justify-content-evenly">
-            <div class="col-1">
-              <div class="row justify-content-evenly">TUE</div>
-              <div class="row justify-content-evenly rain icon"><i class="fas fa-cloud-rain"></i></div>
-              <div class="row justify-content-evenly">6°C</div>
-            </div>
-
-            <div class="col-1">
-              <div class="row justify-content-evenly">WED</div>
-              <div class="row justify-content-evenly cloud icon"><i class="fas fa-cloud"></i></div>
-              <div class="row justify-content-evenly">11°C</div>
-            </div>
-
-            <div class="col-1">
-              <div class="row justify-content-evenly">THU</div>
-              <div class="row justify-content-evenly sun icon"><i class="fas fa-sun"></i></i></div>
-              <div class="row justify-content-evenly">12°C</div>
-            </div>
-
-            <div class="col-1">
-              <div class="row justify-content-evenly">FRI</div>
-              <div class="row justify-content-evenly snow icon"><i class="fas fa-snowflake"></i></i></div>
-              <div class="row justify-content-evenly">-1°C</div>
-            </div>
-
-            <div class="col-1">
-              <div class="row justify-content-evenly">SAT</div>
-              <div class="row justify-content-evenly rain icon"><i class="fas fa-cloud-rain"></i></div>
-              <div class="row justify-content-evenly">5°C</div>
-            </div>
-
-            <div class="col-1">
-              <div class="row justify-content-evenly">SUN</div>
-              <div class="row justify-content-evenly cloud icon"><i class="fas fa-cloud"></i></i></div>
-              <div class="row justify-content-evenly">10°C</div>
+        <div class="col-4">
+          <i class="fas fa-cloud-rain mainIcon rain"></i>
+          <div id="description"></div>
             </div>
           </div>
+          <ul class="row">
+            <p><li class = "temp col-4" ><i class="fas fa-thermometer-full subIcon temp col-1"></i>
+            <span id="temperature"></span>
+            <span class="units"><a href="#" id="celsius">°C</a>  | <a href="#" id="fahrenheit">°F</a></span>
+</li>
+
+            <li class = "weatherConditon col-4" ><i class="fas fa-wind subIcon wind"></i> 
+            <span id="wind-speed"></span>Km/h</li>
+
+            <li class = "weatherConditon col-4" ><i class="fas fa-tint subIcon humidity"></i>
+            <span id="humidity"></span>%</li></p>
+            </ul>
+        </div>
+      <br />
+
+      <div class="card predictionCard" style="width: auto">
+        <div class="card-header predictionHeader">6 Day Forecast</div>
+        <div class="card-body">
+          <div class="predictions">
+            <div class="dayPrediction">
+              <span>day</span>
+              <span class="cloud icon"><i class="fas fa-cloud subIcon"></i></span>
+              <span>10°C</span>
+            </div>
+            <div class="dayPrediction">
+              <span>day</span>
+              <span class="cloud icon"><i class="fas fa-cloud subIcon"></i></span>
+              <span>10°C</span>
+            </div>
+            <div class="dayPrediction">
+              <span>day</span>
+              <span class="cloud icon"><i class="fas fa-cloud subIcon"></i></span>
+              <span>10°C</span>
+            </div>
+            <div class="dayPrediction">
+              <span>day</span>
+              <span class="cloud icon"><i class="fas fa-cloud subIcon"></i></span>
+              <span>10°C</span>
+            </div>
+            <div class="dayPrediction">
+              <span>day</span>
+              <span class="cloud icon"><i class="fas fa-cloud subIcon"></i></span>
+              <span>10°C</span>
+            </div>
+            <div class="dayPrediction">
+              <span>day</span>
+              <span class="cloud icon"><i class="fas fa-cloud subIcon"></i></span>
+              <span>10°C</span>
+            </div>
         </div>
       </div>
+      </div>
 <br />
-      <footer>
-        <p><a href="#" id="celsius">Celsius</a>  | <a href="#" id="fahrenheit">Fahrenheit</a></p>
+    </div>
+    <footer>
           Coded by Elenor Baker <i
           class="fab fa-linkedin linkedin"></i>
-          <i class="fab fa-instagram instagram"></i></i></i><a href="https://github.com/elbaker1995/weather-App" id="open-source" target="blank">Open-source</a>
+          <i class="fab fa-instagram instagram"></i>
+          <a href="https://github.com/elbaker1995/weather-App" id="open-source" target="blank"><i class="fab fa-github-square gitHub"></i></a>
         </p>
-        <script src="src/script.js"></script>
       </footer>
     </div>
+    <script src="src/script.js"></script>
   </body>
 </html>

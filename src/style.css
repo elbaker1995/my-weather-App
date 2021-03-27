@@ -1,140 +1,207 @@
+:root {
+  --primary-color: #fcd1d1;
+  --secondary-color: #fff5ee;
+  --detail-color: #868e99;
+}
+
 body {
+  background-color: var(--secondary-color);
+  font-family: "Quicksand", "sans-serif";
+}
+
+.weatherAppWrapper {
+  max-width: 550px;
+  margin: 30px auto;
+}
+
+.weatherApp {
   background-image: linear-gradient(
     to top,
     #f3e7e9 0%,
     #e3eeff 99%,
     #e3eeff 100%
   );
-  font-family: "Quicksand", "sans-serif";
-  margin: 15px;
-  padding: 0 auto;
-  text-align: center;
+  border: 1px solid var(--detail-color);
+  padding: 20px;
 }
 
-h1 {
-  color: #868e99;
-  font-size: 80px;
-  font-weight: 400;
-}
-
-h2,
-#description,
-.subIcon {
-  font-size: 45px;
-}
-
-h3 {
-  color: #868e99;
-  font-size: 50px;
-  font-weight: 400;
-}
-
-form,
 .popularCities,
-.curentCity,
-#searchbar {
-  margin: 0 auto;
-  padding: 0 auto;
+.predictionCard,
+.predictionHeader,
+.predictions {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 footer,
 .popularCities {
-  color: #868e99;
-  font-size: 25px;
+  color: var(--detail-color);
+  font-size: 20px;
 }
 
 #sydney,
 #tokyo,
-#london,
-#current-location {
+#london {
   background-color: rgba(0, 0, 0, 0);
   border: 1px solid #e3eeff;
   border-radius: 10px;
-  color: #868e99;
+  color: var(--detail-color);
   text-transform: uppercase;
 }
 
 #sydney:hover,
 #tokyo:hover,
 #london:hover,
-#current-location:hover,
+#current-location,
 .goButton {
-  background: #fcd1d1;
-  border: 1px solid #fff5ee;
+  background: var(--primary-color);
+  border: 1px solid var(--secondary-color);
   border-radius: 10px;
   box-shadow: rgba(37, 39, 89, 0.05) 0px 8px 8px 0;
-  color: #fff5ee;
+  color: var(--secondary-color);
 }
 
 #search-bar {
-  background: #fff5ee;
-  border: 1px solid #868e99;
+  background: var(--secondary-color);
+  border: 1px solid var(--detail-color);
   border-radius: 10px;
   box-shadow: rgba(37, 39, 89, 0.05) 0px 8px 8px 0;
-  color: #fcd1d1;
-  font-size: 20px;
-  width: 80%;
+  color: var(--primary-color);
+  width: 75%;
+}
+
+::placeholder {
+  color: var(--primary-color);
+}
+#search-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.goButton,
+#searchBar,
+#current-location {
+  font-size: 18px;
+  padding: 3px 5px;
+}
+
+.goButton:hover,
+#current-location:hover {
+  background-color: var(--secondary-color);
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.curentCity,
+.predictionCard {
+  background-color: var(--secondary-color);
+  border: 2px solid var(--secondary-color);
+  box-shadow: rgba(37, 39, 89, 0.1) 0px 8px 8px 0;
+  max-width: 500px;
+}
+
+h1 {
+  color: var(--detail-color);
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 50px;
+}
+
+a {
+  color: var(--detail-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--primary-color);
+}
+
+.units {
+  color: var(--detail-color);
+  position: relative;
+  font-size: 16px;
+  top: -32px;
 }
 
 .mainIcon {
   font-size: 80px;
+  text-align: center;
 }
 
-::placeholder {
-  color: #fcd1d1;
+.currentDate,
+#description {
+  color: var(--detail-color);
+  font-size: 30px;
+  font-weight: 100;
+  line-height: 40px;
 }
 
-.goButton,
-#searchBar {
-  font-size: 20px;
-  padding: 5px 10px;
+li {
+  display: inline;
+  list-style: none;
+  line-height: 10px;
 }
 
-.goButton:hover {
-  background-color: #fff5ee;
-  border: 1px solid #fcd1d1;
-  color: #fcd1d1;
+.weatherConditons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
-.card {
-  background-color: #fff5ee;
-  border: 2px solid #fff5ee;
-  box-shadow: rgba(37, 39, 89, 0.1) 0px 8px 8px 0;
-  color: #868e99;
-  font-size: 20px;
+#temperature {
+  color: var(--detail-color);
+  font-size: 60px;
+  font-weight: 400;
+}
+.weatherConditon,
+.predictions {
+  color: var(--detail-color);
+  font-size: 24px;
+  font-weight: 400;
 }
 
-.card-header {
-  background: #fcd1d1;
-  border: #fcd1d1;
-  color: #fff5ee;
-  font-size: 40px;
+.predictionHeader {
+  background: var(--primary-color);
+  border: var(--primary-color);
+  color: var(--secondary-color);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 20px;
 }
 
-.icon {
-  font-size: 50px;
+.dayPrediction {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
-.sun,
-.temp {
-  color: #ffd384;
-}
-.snow {
-  color: #ffff;
+
+.icon,
+.subIcon {
+  font-size: 30px;
 }
 
 .rain,
-.humidity {
+.humidity,
+.wind,
+.temp {
   color: #e3eeff;
 }
 
-.cloud,
-.wind {
+.cloud {
   color: #b4bfce;
 }
+
+footer {
+  margin-top: 0;
+}
+
 .linkedin:hover {
   color: #0966c2;
 }
 
 .instagram:hover {
   color: #ed4a62;
+}
+.gitHub:hover {
+  color: #24292e;
 }

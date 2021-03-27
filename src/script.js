@@ -1,5 +1,5 @@
 let now = new Date();
-let h3 = document.querySelector("h3");
+let time = document.querySelector("#time");
 let date = now.getDate();
 let hours = now.getHours();
 let minutes = now.getMinutes();
@@ -19,7 +19,7 @@ let months = [
   "DEC",
 ];
 let month = months[now.getMonth()];
-h3.innerHTML = `${hours}:${minutes} ${date}${month}${year}  `;
+time.innerHTML = `${hours}:${minutes} ${date}${month}${year}  `;
 
 function search(city) {
   let apiKey = "d12bd95cd8fc2d137ab72261317f84d8";
