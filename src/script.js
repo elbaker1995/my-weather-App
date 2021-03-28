@@ -1,36 +1,44 @@
-let now = new Date();
-let date = now.getDate();
-let hours = now.getHours();
-if (hours < 10) {
-  hours = `0${hours}`;
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  let day = date.getDate();
+  let year = date.getFullYear();
+  let months = [
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "NOV",
+    "DEC",
+  ];
+  let month = months[date.getMonth()];
+  return `${formatHours(timestamp)} ${day}${month}${year}`;
 }
-let minutes = now.getMinutes();
-if (minutes < 10) {
-  minutes = `0${minutes}`;
-}
-let year = now.getFullYear();
 
-let months = [
-  "JAN",
-  "FEB",
-  "MAR",
-  "APR",
-  "MAY",
-  "JUN",
-  "JUL",
-  "AUG",
-  "SEP",
-  "NOV",
-  "DEC",
-];
-let month = months[now.getMonth()];
-document.querySelector("#time").innerHTML = `${hours}:${minutes}`;
-document.querySelector("#date").innerHTML = `${date}${month}${year}`;
+function formatHours(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  return `${hours}:${minutes}`;
+}
 
 function search(city) {
   let apiKey = "d12bd95cd8fc2d137ab72261317f84d8";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
   axios.get(`${apiUrl}`).then(displayWeatherCondition);
+
+  let forcastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(`${forcastApiUrl}`).then(displayForecast);
 }
 
 function displayWeatherCondition(response) {
@@ -46,12 +54,39 @@ function displayWeatherCondition(response) {
   document.querySelector("#description").innerHTML =
     response.data.weather[0].main;
 
-  let iconElement = document.querySelector("#main-icon");
+  let dateElement = document.querySelector("#date");
+  dateElement.innerHTML = formatDate(response.data.dt * 1000);
+
+  let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
     "src",
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
-  iconElement.setAttribute("alt", response.data.weather[0].main);
+  iconElement.setAttribute("alt", response.data.weather[0].description);
+}
+
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 6; index++) {
+    forecast = response.data.list[index];
+    forecastElement.innerHTML += `
+  <div id="daily-forecast">
+  <h4>
+  ${formatHours(forecast.dt * 1000)}
+  </h4>
+  <img class= "forecastIcon" src="http://openweathermap.org/img/wn/${
+    forecast.weather[0].icon
+  }@2x.png"/>
+  
+  <div class="forecastTemp"><strong id="highs">${Math.round(
+    forecast.main.temp_max
+  )}°</strong> <span id="lows">
+  ${Math.round(forecast.main.temp_min)}°</span></div></div>
+  `;
+  }
 }
 
 function handleSubmit(event) {
@@ -132,18 +167,26 @@ search("New York");
 function changeTofahrenheit(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
+  let hourlyHighsTemperatureElement = document.querySelector("#highs");
+  let hourlyLowsTemperatureElement = document.querySelector("#lows");
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
   let fahrenheit = (celsius * 9) / 5 + 32;
   temperatureElement.innerHTML = Math.round(fahrenheit);
+  hourlyHighsTemperatureElement.innerHTML = Math.round(fahrenheit);
+  hourlyLowsTemperatureElement.innerHTML = Math.round(fahrenheit);
 }
 
 function changeToCelsius(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
+  let hourlyHighsTemperatureElement = document.querySelector("#highs");
+  let hourlyLowsTemperatureElement = document.querySelector("#lows");
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
   temperatureElement.innerHTML = Math.round(celsius);
+  hourlyHighsTemperatureElement.innerHTML = Math.round(celsius);
+  hourlyLowsTemperatureElement.innerHTML = Math.round(celsius);
 }
 
 let celsius = null;

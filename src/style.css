@@ -27,8 +27,7 @@ body {
 
 .popularCities,
 .predictionCard,
-.predictionHeader,
-.predictions {
+.predictionHeader {
   display: flex;
   justify-content: space-evenly;
 }
@@ -132,11 +131,20 @@ li {
   font-size: 60px;
   font-weight: 400;
 }
-.weatherConditon,
-.predictions {
+
+.weatherConditon {
   color: var(--detail-color);
   font-size: 24px;
   font-weight: 400;
+}
+
+h4,
+.forecastIcon,
+.forecastTemp {
+  color: var(--detail-color);
+  font-size: 16px;
+  max-width: 50px;
+  text-align: center;
 }
 
 .predictionHeader {
@@ -148,10 +156,10 @@ li {
   line-height: 20px;
 }
 
-.dayPrediction {
+#forecast {
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .subIcon {
@@ -165,9 +173,8 @@ li {
 }
 
 footer {
-  margin-top: 0;
+  margin-top: -20px;
 }
-
 .linkedin:hover {
   color: #0966c2;
 }
