@@ -27,7 +27,9 @@ body {
 
 .popularCities,
 .predictionCard,
-.predictionHeader {
+.predictionHeader,
+.dailyPredictionHeader,
+.dailyPredictionCard {
   display: flex;
   justify-content: space-evenly;
 }
@@ -93,7 +95,8 @@ footer,
 }
 
 .curentCity,
-.predictionCard {
+.predictionCard,
+.dailyPredictionCard {
   background-color: var(--secondary-color);
   border: 2px solid var(--secondary-color);
   box-shadow: rgba(37, 39, 89, 0.1) 0px 8px 8px 0;
@@ -140,14 +143,23 @@ li {
 
 h4,
 .forecastIcon,
-.forecastTemp {
+.forecastTemp,
+.dailyForecastIcon,
+.dailyForecastTemp {
   color: var(--detail-color);
   font-size: 16px;
   max-width: 50px;
   text-align: center;
 }
 
-.predictionHeader {
+.dailyForecastIcon,
+.dailyForecastTemp {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.predictionHeader,
+.dailyPredictionHeader {
   background: var(--primary-color);
   border: var(--primary-color);
   color: var(--secondary-color);

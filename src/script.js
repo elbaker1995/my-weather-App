@@ -19,6 +19,28 @@ function formatDate(timestamp) {
   return `${formatHours(timestamp)} ${day}${month}${year}`;
 }
 
+function displayForecast() {
+  let dailyForecastElement = document.querySelector("#daily-forecast");
+
+  let dailyForecastHTML = `<div>`;
+  let days = ["THU", "FRI", "SAT", "SUN"];
+  days.forEach(function (day) {
+    dailyForecastHTML =
+      dailyForecastHTML +
+      `<div id="daily-forecast">
+  <h4>
+  ${day}
+  </h4>
+  <img class= "dailyForecastIcon flex" src="http://openweathermap.org/img/wn/50d@2x.png" alt="" width="42"/>
+  
+  <div class="dailyForecastTemp flex">
+  <span id="highs">18°</span> <span id="lows">
+  12°</span></div></div>`;
+  });
+  dailyForecastHTML = dailyForecastHTML + `</div>`;
+  dailyForecastElement.innerHTML = dailyForecastHTML;
+}
+
 function formatHours(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
@@ -38,7 +60,7 @@ function search(city) {
   axios.get(`${apiUrl}`).then(displayWeatherCondition);
 
   let forcastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
-  axios.get(`${forcastApiUrl}`).then(displayForecast);
+  axios.get(`${forcastApiUrl}`).then(displayHourlyForecast);
 }
 
 function displayWeatherCondition(response) {
@@ -65,7 +87,7 @@ function displayWeatherCondition(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
-function displayForecast(response) {
+function displayHourlyForecast(response) {
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = null;
   let forecast = null;
@@ -162,6 +184,7 @@ londonButton.addEventListener("click", searchLondon);
 let lndUrl = `https://api.openweathermap.org/data/2.5/weather?q=london&units=metric&appid=d12bd95cd8fc2d137ab72261317f84d8`;
 axios.get(lndUrl).then(londonDisplay);
 
+displayForecast();
 search("New York");
 
 function changeTofahrenheit(event) {
