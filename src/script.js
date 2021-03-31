@@ -19,28 +19,6 @@ function formatDate(timestamp) {
   return `${formatHours(timestamp)} ${day}${month}${year}`;
 }
 
-function displayForecast() {
-  let dailyForecastElement = document.querySelector("#daily-forecast");
-
-  let dailyForecastHTML = `<div>`;
-  let days = ["THU", "FRI", "SAT", "SUN"];
-  days.forEach(function (day) {
-    dailyForecastHTML =
-      dailyForecastHTML +
-      `<div id="daily-forecast">
-  <h4>
-  ${day}
-  </h4>
-  <img class= "dailyForecastIcon flex" src="http://openweathermap.org/img/wn/50d@2x.png" alt="" width="42"/>
-  
-  <div class="dailyForecastTemp flex">
-  <span id="highs">18°</span> <span id="lows">
-  12°</span></div></div>`;
-  });
-  dailyForecastHTML = dailyForecastHTML + `</div>`;
-  dailyForecastElement.innerHTML = dailyForecastHTML;
-}
-
 function formatHours(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
@@ -54,13 +32,46 @@ function formatHours(timestamp) {
   return `${hours}:${minutes}`;
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  return days[day];
+}
+
+function displayDailyForecast(response) {
+  let dailyForecast = response.data.daily;
+
+  let dailyForecastElement = document.querySelector("#daily-forecast");
+
+  let dailyForecastHTML = `<div class="row flex dailyForecastContainer">`;
+
+  dailyForecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      dailyForecastHTML += `<div class="col-2 flex dailyForecast">
+  <h4>
+  ${formatDay(forecastDay.dt)}
+  </h4>
+  <img class= "dailyForecastIcon flex" src="http://openweathermap.org/img/wn/${
+    forecastDay.weather[0].icon
+  }@2x.png" alt="" width="42"/>
+  
+  <div class="dailyForecastTemp flex">
+  <span id="highs">${Math.round(forecastDay.temp.max)}°</span> <span id="lows">
+  ${Math.round(forecastDay.temp.min)}°</span></div></div>`;
+    }
+  });
+  dailyForecastHTML = dailyForecastHTML + `</div>`;
+  dailyForecastElement.innerHTML = dailyForecastHTML;
+}
+
 function search(city) {
   let apiKey = "d12bd95cd8fc2d137ab72261317f84d8";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
   axios.get(`${apiUrl}`).then(displayWeatherCondition);
 
-  let forcastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
-  axios.get(`${forcastApiUrl}`).then(displayHourlyForecast);
+  let forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(`${forecastApiUrl}`).then(displayHourlyForecast);
 }
 
 function displayWeatherCondition(response) {
@@ -85,6 +96,8 @@ function displayWeatherCondition(response) {
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  getForecast(response.data.coord);
 }
 
 function displayHourlyForecast(response) {
@@ -95,7 +108,7 @@ function displayHourlyForecast(response) {
   for (let index = 0; index < 6; index++) {
     forecast = response.data.list[index];
     forecastElement.innerHTML += `
-  <div id="daily-forecast">
+  <div id="hourly-forecast">
   <h4>
   ${formatHours(forecast.dt * 1000)}
   </h4>
@@ -105,10 +118,16 @@ function displayHourlyForecast(response) {
   
   <div class="forecastTemp"><strong id="highs">${Math.round(
     forecast.main.temp_max
-  )}°</strong> <span id="lows">
-  ${Math.round(forecast.main.temp_min)}°</span></div></div>
+  )}°</strong> 
+  </div></div>
   `;
   }
+}
+
+function getForecast(coordinates) {
+  let apiKey = "d12bd95cd8fc2d137ab72261317f84d8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(`${apiUrl}`).then(displayDailyForecast);
 }
 
 function handleSubmit(event) {
@@ -184,7 +203,6 @@ londonButton.addEventListener("click", searchLondon);
 let lndUrl = `https://api.openweathermap.org/data/2.5/weather?q=london&units=metric&appid=d12bd95cd8fc2d137ab72261317f84d8`;
 axios.get(lndUrl).then(londonDisplay);
 
-displayForecast();
 search("New York");
 
 function changeTofahrenheit(event) {

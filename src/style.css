@@ -27,9 +27,9 @@ body {
 
 .popularCities,
 .predictionCard,
+.dailyForecastCard,
 .predictionHeader,
-.dailyPredictionHeader,
-.dailyPredictionCard {
+.dailyForecastHeader {
   display: flex;
   justify-content: space-evenly;
 }
@@ -75,7 +75,8 @@ footer,
   color: var(--primary-color);
 }
 .weatherConditons,
-#search-form {
+#search-form,
+.dailyForecastContainer {
   display: flex;
   justify-content: space-between;
 }
@@ -96,7 +97,7 @@ footer,
 
 .curentCity,
 .predictionCard,
-.dailyPredictionCard {
+.dailyForecastCard {
   background-color: var(--secondary-color);
   border: 2px solid var(--secondary-color);
   box-shadow: rgba(37, 39, 89, 0.1) 0px 8px 8px 0;
@@ -159,7 +160,7 @@ h4,
 }
 
 .predictionHeader,
-.dailyPredictionHeader {
+.dailyForecastHeader {
   background: var(--primary-color);
   border: var(--primary-color);
   color: var(--secondary-color);
@@ -168,7 +169,8 @@ h4,
   line-height: 20px;
 }
 
-#forecast {
+#forecast,
+#dailyForecast {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
