@@ -204,36 +204,3 @@ let lndUrl = `https://api.openweathermap.org/data/2.5/weather?q=london&units=met
 axios.get(lndUrl).then(londonDisplay);
 
 search("New York");
-
-function changeTofahrenheit(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  let hourlyHighsTemperatureElement = document.querySelector("#highs");
-  let hourlyLowsTemperatureElement = document.querySelector("#lows");
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-  let fahrenheit = (celsius * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahrenheit);
-  hourlyHighsTemperatureElement.innerHTML = Math.round(fahrenheit);
-  hourlyLowsTemperatureElement.innerHTML = Math.round(fahrenheit);
-}
-
-function changeToCelsius(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  let hourlyHighsTemperatureElement = document.querySelector("#highs");
-  let hourlyLowsTemperatureElement = document.querySelector("#lows");
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
-  temperatureElement.innerHTML = Math.round(celsius);
-  hourlyHighsTemperatureElement.innerHTML = Math.round(celsius);
-  hourlyLowsTemperatureElement.innerHTML = Math.round(celsius);
-}
-
-let celsius = null;
-
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", changeTofahrenheit);
-
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", changeToCelsius);

@@ -111,11 +111,6 @@ h1 {
   line-height: 50px;
 }
 
-.mainIcon {
-  font-size: 80px;
-  text-align: center;
-}
-
 .currentDate,
 #description {
   color: var(--detail-color);
@@ -124,10 +119,9 @@ h1 {
   line-height: 40px;
 }
 
-li {
-  display: inline;
-  list-style: none;
-  line-height: 10px;
+.mainIcon {
+  font-size: 80px;
+  text-align: center;
 }
 
 #temperature {
@@ -136,10 +130,28 @@ li {
   font-weight: 400;
 }
 
+.units {
+  color: var(--detail-color);
+  position: relative;
+  font-size: 20px;
+  top: -32px;
+}
+
+li {
+  display: inline;
+  list-style: none;
+  line-height: 10px;
+}
+
 .weatherConditon {
   color: var(--detail-color);
   font-size: 24px;
   font-weight: 400;
+}
+
+.subIcon {
+  font-size: 30px;
+  color: #e3eeff;
 }
 
 h4,
@@ -156,7 +168,14 @@ h4,
 .dailyForecastIcon,
 .dailyForecastTemp {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+}
+
+#forecast,
+#dailyForecast {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .predictionHeader,
@@ -169,26 +188,14 @@ h4,
   line-height: 20px;
 }
 
-#forecast,
-#dailyForecast {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.subIcon {
-  font-size: 30px;
-}
-
-.humidity,
-.wind,
-.temp {
-  color: #e3eeff;
-}
-
 footer {
   margin-top: -20px;
 }
+
+a {
+  color: var(--detail-color);
+}
+
 .linkedin:hover {
   color: #0966c2;
 }
@@ -198,28 +205,4 @@ footer {
 }
 .gitHub:hover {
   color: #24292e;
-}
-
-.units {
-  color: var(--detail-color);
-  position: relative;
-  font-size: 20px;
-  top: -32px;
-}
-
-a {
-  text-decoration: none;
-  color: var(--detail-color);
-}
-
-.active {
-  text-decoration: none;
-  font-weight: 900;
-  color: var(--detail-color);
-  cursor: default;
-}
-
-.active:hover {
-  text-decoration: none;
-  color: var(--detail-color);
 }
