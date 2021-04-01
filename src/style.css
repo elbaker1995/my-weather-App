@@ -165,12 +165,6 @@ h4,
   text-align: center;
 }
 
-.dailyForecastIcon,
-.dailyForecastTemp {
-  display: flex;
-  justify-content: space-between;
-}
-
 #forecast,
 #dailyForecast {
   display: flex;
