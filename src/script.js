@@ -39,7 +39,7 @@ function formatDay(timestamp) {
   return days[day];
 }
 
-function displayHourlyForecast(response, timestamp) {
+function displayHourlyForecast(response) {
   let hourlyForecast = null;
   let hourlyForecastElement = document.querySelector("#hourly-forecast-card");
   let hourlyForecastHTML = `<div class="row flex hourlyForecastContainer">`;
@@ -145,7 +145,6 @@ function getCurrentCityTime(coordinates) {
 function currentCityTime(response) {
   let dateElement = document.querySelector("#date");
   dateElement.innerHTML = formatDate(response.data.timestamp * 1000);
-  // formatHours(response.data.timestamp * 1000);
 }
 
 function handleSubmit(event) {
