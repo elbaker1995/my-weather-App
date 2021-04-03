@@ -33,15 +33,14 @@ function formatHours(timestamp) {
 }
 
 function formatDay(timestamp) {
-  let date = new Date(timestamp * 1000);
+  let date = new Date(timestamp);
   let day = date.getDay();
   let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   return days[day];
 }
 
-function displayHourlyForecast(response) {
+function displayHourlyForecast(response, timestamp) {
   let hourlyForecast = null;
-
   let hourlyForecastElement = document.querySelector("#hourly-forecast-card");
   let hourlyForecastHTML = `<div class="row flex hourlyForecastContainer">`;
 
@@ -56,9 +55,9 @@ ${formatHours(hourlyForecast.dt * 1000)}
       hourlyForecast.weather[0].icon
     }@2x.png" alt="" width="42"/>
   
-<div class="hourlyForecastTemp"><strong id="highs">${Math.round(
+<div class="hourlyForecastTemp"><span>${Math.round(
       hourlyForecast.main.temp
-    )}°</strong> 
+    )}°</span> 
 </div></div>
 `;
   }
@@ -84,7 +83,9 @@ function displayDailyForecast(response) {
   }@2x.png" alt="" width="42"/>
   
   <div class="dailyForecastTemp flex">
-  <span id="highs">${Math.round(forecastDay.temp.max)}°</span> <span id="lows">
+  <strong id="highs">${Math.round(
+    forecastDay.temp.max
+  )}°</strong> <span id="lows">
   ${Math.round(forecastDay.temp.min)}°</span></div></div>`;
     }
   });
@@ -111,9 +112,6 @@ function displayWeatherCondition(response) {
   document.querySelector("#description").innerHTML =
     response.data.weather[0].main;
 
-  let dateElement = document.querySelector("#date");
-  dateElement.innerHTML = formatDate(response.data.dt * 1000);
-
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
     "src",
@@ -123,6 +121,7 @@ function displayWeatherCondition(response) {
 
   getHourlyForecast(response.data.name);
   getForecast(response.data.coord);
+  getCurrentCityTime(response.data.coord);
 }
 
 function getHourlyForecast(city) {
@@ -135,6 +134,18 @@ function getForecast(coordinates) {
   let apiKey = "d12bd95cd8fc2d137ab72261317f84d8";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   axios.get(`${apiUrl}`).then(displayDailyForecast);
+}
+
+function getCurrentCityTime(coordinates) {
+  let apiUrl = `http://api.timezonedb.com/v2.1/get-time-zone?key=4Y6OZO359RGR&format=json&by=position&lat=${coordinates.lat}&lng=${coordinates.lon}
+`;
+  axios.get(`${apiUrl}`).then(currentCityTime);
+}
+
+function currentCityTime(response) {
+  let dateElement = document.querySelector("#date");
+  dateElement.innerHTML = formatDate(response.data.timestamp * 1000);
+  // formatHours(response.data.timestamp * 1000);
 }
 
 function handleSubmit(event) {
