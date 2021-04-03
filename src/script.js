@@ -33,7 +33,7 @@ function formatHours(timestamp) {
 }
 
 function formatDay(timestamp) {
-  let date = new Date(timestamp);
+  let date = new Date(timestamp * 1000);
   let day = date.getDay();
   let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   return days[day];
@@ -41,6 +41,7 @@ function formatDay(timestamp) {
 
 function displayHourlyForecast(response) {
   let hourlyForecast = null;
+
   let hourlyForecastElement = document.querySelector("#hourly-forecast-card");
   let hourlyForecastHTML = `<div class="row flex hourlyForecastContainer">`;
 
@@ -137,7 +138,7 @@ function getForecast(coordinates) {
 }
 
 function getCurrentCityTime(coordinates) {
-  let apiUrl = `http://api.timezonedb.com/v2.1/get-time-zone?key=4Y6OZO359RGR&format=json&by=position&lat=${coordinates.lat}&lng=${coordinates.lon}
+  let apiUrl = `https://api.timezonedb.com/v2.1/get-time-zone?key=4Y6OZO359RGR&format=json&by=position&lat=${coordinates.lat}&lng=${coordinates.lon}
 `;
   axios.get(`${apiUrl}`).then(currentCityTime);
 }
