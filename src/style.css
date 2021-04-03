@@ -155,8 +155,8 @@ li {
 }
 
 h4,
-.forecastIcon,
-.forecastTemp,
+.hourlyForecastIcon,
+.hourlyForecastTemp,
 .dailyForecastIcon,
 .dailyForecastTemp {
   color: var(--detail-color);

@@ -39,6 +39,33 @@ function formatDay(timestamp) {
   return days[day];
 }
 
+function displayHourlyForecast(response) {
+  let hourlyForecast = null;
+
+  let hourlyForecastElement = document.querySelector("#hourly-forecast-card");
+  let hourlyForecastHTML = `<div class="row flex hourlyForecastContainer">`;
+
+  for (let index = 0; index < 6; index++) {
+    hourlyForecast = response.data.list[index];
+    hourlyForecastHTML += `
+<div class="col-2 flex hourlyForecast" id="hourly-forecast">
+<h4>
+${formatHours(hourlyForecast.dt * 1000)}
+</h4>
+<img class= "hourlyForecastIcon" src="http://openweathermap.org/img/wn/${
+      hourlyForecast.weather[0].icon
+    }@2x.png" alt="" width="42"/>
+  
+<div class="hourlyForecastTemp"><strong id="highs">${Math.round(
+      hourlyForecast.main.temp
+    )}°</strong> 
+</div></div>
+`;
+  }
+  hourlyForecastHTML = hourlyForecastHTML + `</div>`;
+  hourlyForecastElement.innerHTML = hourlyForecastHTML;
+}
+
 function displayDailyForecast(response) {
   let dailyForecast = response.data.daily;
 
@@ -69,9 +96,6 @@ function search(city) {
   let apiKey = "d12bd95cd8fc2d137ab72261317f84d8";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
   axios.get(`${apiUrl}`).then(displayWeatherCondition);
-
-  let forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
-  axios.get(`${forecastApiUrl}`).then(displayHourlyForecast);
 }
 
 function displayWeatherCondition(response) {
@@ -97,31 +121,14 @@ function displayWeatherCondition(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 
+  getHourlyForecast(response.data.name);
   getForecast(response.data.coord);
 }
 
-function displayHourlyForecast(response) {
-  let forecastElement = document.querySelector("#forecast");
-  forecastElement.innerHTML = null;
-  let forecast = null;
-
-  for (let index = 0; index < 6; index++) {
-    forecast = response.data.list[index];
-    forecastElement.innerHTML += `
-  <div id="hourly-forecast">
-  <h4>
-  ${formatHours(forecast.dt * 1000)}
-  </h4>
-  <img class= "forecastIcon" src="http://openweathermap.org/img/wn/${
-    forecast.weather[0].icon
-  }@2x.png"/>
-  
-  <div class="forecastTemp"><strong id="highs">${Math.round(
-    forecast.main.temp_max
-  )}°</strong> 
-  </div></div>
-  `;
-  }
+function getHourlyForecast(city) {
+  let apiKey = "d12bd95cd8fc2d137ab72261317f84d8";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(`${apiUrl}`).then(displayHourlyForecast);
 }
 
 function getForecast(coordinates) {
