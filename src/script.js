@@ -52,7 +52,7 @@ function displayHourlyForecast(response) {
 <h4>
 ${formatHours(hourlyForecast.dt * 1000)}
 </h4>
-<img class= "hourlyForecastIcon" src="http://openweathermap.org/img/wn/${
+<img class= "hourlyForecastIcon" src="https://openweathermap.org/img/wn/${
       hourlyForecast.weather[0].icon
     }@2x.png" alt="" width="42"/>
   
@@ -79,7 +79,7 @@ function displayDailyForecast(response) {
   <h4>
   ${formatDay(forecastDay.dt)}
   </h4>
-  <img class= "dailyForecastIcon flex" src="http://openweathermap.org/img/wn/${
+  <img class= "dailyForecastIcon flex" src="https://openweathermap.org/img/wn/${
     forecastDay.weather[0].icon
   }@2x.png" alt="" width="42"/>
   
